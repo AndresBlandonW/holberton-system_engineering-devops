@@ -1,2 +1,2 @@
 #!/bin/bash
-printf "\t%.64s\n" {a..z}{a..z} | grep -v oo
+printf "\t%.64s\n" {a..z}{a..z} | grep -v oo | head -64
