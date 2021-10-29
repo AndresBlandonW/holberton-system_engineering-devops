@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Displays content o flist by the name
+c_dir="$(ls .)"
+for list in $c_dir
+  do
+    echo "$list" | cut -d '-' -f2
+done
