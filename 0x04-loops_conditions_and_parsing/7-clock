@@ -2,21 +2,14 @@
 # Script that displays the time for 12 hours
 hour=0
 min=0
-echo "Hour: $hour"
-while :
+while [ "$hour" -lt 13 ]
 do
-		min=$(( min + 1 ))
-		echo $min
-        if [ "$min" -eq 99 ]
-        then
-			if [ "$hour" -eq 12 ]
-			then
-				hour=0
-			else
-				hour=$(( hour + 1 ))
-			fi
-			echo "Hour: $hour"
-			min=0
-        fi
-        
+    echo "Hour: $hour"
+    min=1
+    while [ $min -lt 60 ]
+      do
+        echo $min
+        min=$(( min + 1 ))
+      done
+    hour=$(( hour + 1 ))
 done
