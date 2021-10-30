@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 # Script that display a list of currently running processes
-ps -ef
+ps auxf -g 0
