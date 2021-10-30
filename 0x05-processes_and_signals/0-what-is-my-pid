@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
-echo $BASHPID
+# Script that diplay my own PID
+echo $$
