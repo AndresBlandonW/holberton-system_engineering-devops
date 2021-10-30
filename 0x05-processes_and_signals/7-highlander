@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Script that indefinitely and show message when receiving signal
+inv() {
+	echo "I am invincible!!!"
+}
+trap inv SIGTERM
+while true
+do
+    echo "To infinity and beyond"
+    sleep 2
+done
