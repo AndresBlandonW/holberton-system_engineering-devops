@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
-ifconfig | grep "inet "| cut -d " " -f10
+# Display all IPV4
+ifconfig | grep "inet addr" | cut -d ':' -f2 | cut -d ' ' -f1
