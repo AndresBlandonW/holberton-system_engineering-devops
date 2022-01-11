@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 # Configure Nginx so that its HTTP response contains a custom header
 sudo apt-get -y update
+sudo apt-get -y upgrade
 sudo apt-get -y install nginx
 sudo chown -R "$USER":"$USER" /var/www/
 sudo chown -R "$USER":"$USER" /etc/nginx
-echo "Hello World!" > /var/www/html/index.nginx-debian.html
+echo "Hello World" > /var/www/html/index.nginx-debian.html
 sudo sed -i "/http {/a add_header X-Served-By ${HOSTNAME};" /etc/nginx/nginx.conf
 sudo service nginx reload
 sudo service nginx start
