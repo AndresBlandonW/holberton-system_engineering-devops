@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Install and configure HAproxy and send traffic
-sudo apt -y install haproxy
+sudo apt-get -y update
+sudo apt-get -y install haproxy
 sudo tee -a /etc/haproxy/haproxy.cfg > /dev/null <<EOT
 frontend http_web
     bind *:80
