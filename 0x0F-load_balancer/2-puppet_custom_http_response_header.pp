@@ -4,18 +4,32 @@ exec { 'update':
 }
 
 package { 'nginx':
-    ensure   => 'installed',
-    provider => 'apt',
-    require => Exec['update']
+    ensure   => installed,
+    require => exec['update'],
 }
 
-exec { 'Create custom HTTP header':
-    command => "/usr/bin/env sed -i '/^\tserver_name.*/a \\\tadd_header X-Served-By ${hostname};\n' /etc/nginx/sites-available/default"
-    require => Package['nginx']
+file_line { 'redirect':
+  ensure  => 'present',
+  path    => '/etc/nginx/sites-available/default',
+  after   => 'listen 80 default_server;',
+  line    => 'rewrite ^/redirect_me https://www.youtube.com/watch?v=dQw4w9WgXcQ permanent;',
+  require => Package['nginx'],
 }
 
-service { 'restart':
-    ensure  => running,
-    require => Exec['Create custom HTTP header'],
-    restart => 'sudo service nginx restart',
+file_line { 'addHeader':
+  ensure  => 'present',
+  path    => '/etc/nginx/sites-available/default',
+  after   => 'listen 80 default_server;',
+  line    => 'add_header X-Served-By $hostname;',
+  require => Package['nginx'],
+}
+
+file { '/var/www/html/index.html':
+  content => 'Holberton School',
+  require => Package['nginx'],
+}
+
+service { 'nginx':
+  ensure  => running,
+  require => Package['nginx'],
 }
