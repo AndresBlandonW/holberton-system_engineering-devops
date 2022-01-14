@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Configure your domain zone, subdomain www points to your load-balancer IP
+# shellcheck disable=SC2086
+# Configure your domain zone, subdomain www to your load-balancer IP
 
 show_info ()
 {
