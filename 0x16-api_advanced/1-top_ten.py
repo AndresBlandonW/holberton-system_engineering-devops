@@ -15,4 +15,4 @@ def top_ten(subreddit):
         for c in children:
             print(c.get("data").get("title"))
     else:
-        return 0
+        print("None")
