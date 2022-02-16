@@ -6,7 +6,8 @@ from requests import get
 
 def recurse(subreddit, hot_list=[], after=''):
     """return all hot post"""
-    apiUrl = "https://www.reddit.com/r/{}/hot.json?after={}".format(subreddit, after)
+    apiUrl = "https://www.reddit.com/r/{}/hot.json?after={}".format(subreddit,
+                                                                    after)
     headers = {'user-agent': 'my-app/0.0.1'}
     req = get(apiUrl, headers=headers)
     if req.json().get("kind") == "Listing":
