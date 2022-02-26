@@ -33,6 +33,17 @@ server {
 	location  /api/ {
                 proxy_pass http://127.0.0.1:5002;
         }
+
+	location  / {
+		  # First attempt to serve request as file, then
+                # as directory, then fall back to displaying a 404.
+                try_files $uri $uri/ =404;
+                proxy_pass http://127.0.0.1:5003/2-hbnb;
+        }
+
+        location /static/ {
+                root /home/ubuntu/AirBnB_clone_v4/web_dynamic;
+        }
 	# SSL configuration
 	#
 	# listen 443 ssl default_server;
@@ -56,31 +67,34 @@ server {
 
 	server_name _;
 
-	add_header X-Served-By $hostname;
+	location /hbnb_static/ {
+		 alias /data/web_static/current/;
+		 }
 
-	location / {
-		 # First attempt to serve request as file, then
-		   # as directory, then fall back to displaying a 404.
-		     try_files $uri $uri/ =404;
-		     }
+		 add_header X-Served-By $hostname;
 
-		     # pass PHP scripts to FastCGI server
-		     #
-		     #location ~ \.php$ {
-		     #	       include snippets/fastcgi-php.conf;
-		     #
-		     #	# With php-fpm (or other unix sockets):
-		     #	fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
-		     #	# With php-cgi (or other tcp sockets):
-		     #	fastcgi_pass 127.0.0.1:9000;
-		     #}
+#		 location / {
+		 	  # First attempt to serve request as file, then
+			    # as directory, then fall back to displaying a 404.
+#			      try_files $uri $uri/ =404;
+#			      }
+			      # pass PHP scripts to FastCGI server
+			      #
+			      #location ~ \.php$ {
+			      #		include snippets/fastcgi-php.conf;
+			      #
+			      #	# With php-fpm (or other unix sockets):
+			      #	fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+			      #	# With php-cgi (or other tcp sockets):
+			      #	fastcgi_pass 127.0.0.1:9000;
+			      #}
 
-		     # deny access to .htaccess files, if Apache's document root
-		     # concurs with nginx's one
-		     #
-		     #location ~ /\.ht {
-		     #	       deny all;
-		     #}
+			      # deny access to .htaccess files, if Apache's document root
+			      # concurs with nginx's one
+			      #
+			      #location ~ /\.ht {
+			      #		deny all;
+			      #}
 }
 
 
